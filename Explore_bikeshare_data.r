@@ -42,7 +42,7 @@ myfun<- function(Q=DF, name='User.Type'){
     print(A)
 
 }
-
+# import ggplot library
 library(ggplot2)
 
 # month: using substring function
