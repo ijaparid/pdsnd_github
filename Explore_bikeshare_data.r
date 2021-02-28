@@ -1,4 +1,4 @@
-
+#Importing dataframes
 ny = read.csv('new_york_city.csv')
 wash = read.csv('washington.csv')
 chi = read.csv('chicago.csv')
@@ -28,7 +28,7 @@ myfun<- function(Q=DF, name='User.Type'){
     category<-unique(Q[,name]) #getting unique values of the columns
     A=data.frame(category) # making those unique values into a data frame
     A$count=0 # adding the count column with zeros
-    
+
     # for every unique value I go over every entry in the provided column, if the entries are the same, I add 1 in the count column for that value
     for (j in 1: length(A$count)){
     for (i in 1:length(Q[,name])){
@@ -40,9 +40,9 @@ myfun<- function(Q=DF, name='User.Type'){
     A=A[order(-A$count),] # sorting by decerasing order.
     return(A)
     print(A)
-    
-}
 
+}
+# import ggplot library
 library(ggplot2)
 
 # month: using substring function
@@ -51,7 +51,7 @@ DF$month<-substring(DF$Start.Time, 6,7)
 DF$wday<-weekdays(as.Date(DF$Start.Time))
 #hour: using substring function
 DF$hour<-substring(DF$Start.Time, 12,13)
-# checking the first several lines to make sure it worked well. 
+# checking the first several lines to make sure it worked well.
 head(DF)
 
 ggplot(DF,aes(wday))+geom_bar()+labs(title ="Most common day of week by city", x = "Days of week", y = "Count")+facet_grid(city ~ ., scales="free")
@@ -73,8 +73,8 @@ head(Stats)
 
 # I use sum() and mean() functions to obtain relevant statistics for each city.
 for (i in unique(DF$city)){
-    Stats[ Stats$unique.DF.city.==i,'total']=sum(DF[DF$city==i & DF$User.Type=='Customer','Trip.Duration'], na.rm=T)  
-    Stats[ Stats$unique.DF.city.==i,'mean']=mean(DF[DF$city==i & DF$User.Type=='Customer','Trip.Duration']) 
+    Stats[ Stats$unique.DF.city.==i,'total']=sum(DF[DF$city==i & DF$User.Type=='Customer','Trip.Duration'], na.rm=T)
+    Stats[ Stats$unique.DF.city.==i,'mean']=mean(DF[DF$city==i & DF$User.Type=='Customer','Trip.Duration'])
 }
 # checking it worked
 head(Stats)
@@ -87,7 +87,7 @@ ggplot(Stats,aes(x=Stats$unique.DF.city. ,y=Stats$mean))+geom_bar(stat = 'identi
 # I apply the myfun function to count user types. Note that I could do this using bar plot, as categories are relatively small
 myfun(Q=DF, name='User.Type')
 
-# I apply the myfun function to count user gender. 
+# I apply the myfun function to count user gender.
 myfun(Q=DF1, name='Gender')
 
 max(ny$Birth.Year, na.rm=T)
