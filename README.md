@@ -7,7 +7,7 @@ Created on February 28, 2021
 Bikeshare project
 
 ### Description
-Describe what your project is about and what it does
+The project is to analyze bikeshare program active in three cities to get some insights about the demographics of users and frequency of use.
 
 ### Files used
 Include the files used
